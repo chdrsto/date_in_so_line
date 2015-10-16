@@ -10,7 +10,7 @@
 	                        	<group col="4" colspan="2">
 	                            		<field name="soplanned_date" select="2"/>
 	                            		<button name="set_delivery_dates" string="Update line planned date"
-	                                		states="draft" type="object" colspan="2"/>
+	                                		states="draft,sent" type="object" colspan="2"/>
 	                        	</group>
 	                    	</field>
 				<field name="product_id" select="2" position="before">

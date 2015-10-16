@@ -42,7 +42,7 @@ class sale_order(osv.osv):
     _columns = {
         'soplanned_date':fields.date('SO Planned Delivery date',
                                      readonly=True,
-                                     states={'draft':[('readonly',False)]},
+                                     states={'draft':[('readonly',False)],'sent':[('readonly',False)]},
                                      help="Fullfill to force 'Planned delivery Date' in all lines "
                                           "according to the selected date (when creating the SO lines).\n"
                                           "Leave empty to let the system compute lines values.\n"
