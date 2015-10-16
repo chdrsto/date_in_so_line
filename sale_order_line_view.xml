@@ -1,40 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-	<record model="ir.ui.view" id="view_order_form_inherit">
-		<field name="name">sale.order.form.inherit</field>
-		<field name="model">sale.order</field>
-		<field name="inherit_id" ref="sale.view_order_form"/>
-		<field name="arch" type="xml">
-			<field name="client_order_ref" select="2" position="after">
-                        	<group col="4" colspan="2">
-                            		<field name="soplanned_date" select="2"/>
-                            		<button name="set_delivery_dates" string="Update line planned date"
-                                		states="draft" type="object" colspan="2"/>
-                        	</group>
-                    	</field>
-			<field name="product_id" select="2" position="before">
-				<field name="sequence"/>
+		<record model="ir.ui.view" id="sales_order_view_form">
+			<field name="name">sale.order.form.inherit</field>
+			<field name="model">sale.order</field>
+			<field name="inherit_id" ref="sale.view_order_form"/>
+			<field name="arch" type="xml">
+				<field name="client_order_ref" select="2" position="after">
+	                        	<group col="4" colspan="2">
+	                            		<field name="soplanned_date" select="2"/>
+	                            		<button name="set_delivery_dates" string="Update line planned date"
+	                                		states="draft" type="object" colspan="2"/>
+	                        	</group>
+	                    	</field>
+				<field name="product_id" select="2" position="before">
+					<field name="sequence"/>
+				</field>
+				<field name="tax_id" select="2" position="before">
+	                        	<field name="planned_date" default_get="{'myplanned_date': planned_date}"  select="2"/>
+	                    	</field>
+				<xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="before">
+					<field string="Seq" name="sequence"/>
+				</xpath>
+				<xpath expr="//field[@name='order_line']/tree/field[@name='discount']" position="before">
+					<field string="Delivery Date" name="planned_date"/>
+				</xpath>
+				<xpath expr="//field[@name='order_line']/tree/field[@name='product_uom_qty']" position="before">
+	        		    <field name="delivered_qty"/>
+	                	</xpath>
+				<xpath expr="//field[@name='order_line']/tree/field[@name='delivered_qty']" position="before">
+					<field name="qty_available"/>
+				</xpath>
+				<xpath expr="//field[@name='order_line']/tree/field[@name='qty_available']" position="before">
+					<field name="virtual_available"/>
+				</xpath>
 			</field>
-			<field name="tax_id" select="2" position="before">
-                        	<field name="planned_date" default_get="{'myplanned_date': planned_date}"  select="2"/>
-                    	</field>
-			<xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="before">
-				<field string="Seq" name="sequence"/>
-			</xpath>
-			<xpath expr="//field[@name='order_line']/tree/field[@name='discount']" position="before">
-				<field string="Delivery Date" name="planned_date"/>
-			</xpath>
-			<xpath expr="//field[@name='order_line']/tree/field[@name='product_uom_qty']" position="before">
-        		    <field name="delivered_qty"/>
-                	</xpath>
-			<xpath expr="//field[@name='order_line']/tree/field[@name='delivered_qty']" position="before">
-				<field name="qty_available"/>
-			</xpath>
-			<xpath expr="//field[@name='order_line']/tree/field[@name='qty_available']" position="before">
-				<field name="virtual_available"/>
-			</xpath>
-		</field>
-	</record>
+		</record>
     </data>
 </openerp>

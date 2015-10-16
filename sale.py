@@ -158,7 +158,11 @@ class sale_order_line(osv.osv):
     _inherit = "sale.order.line"
 
     def get_default_delivery_date(self, cr, uid, context={}) :
-        return context.get('myplanned_date', False)
+        #return context.get('myplanned_date', False)
+        sales = self.pool.get('sale_order')
+        vSOplanned_date = super(sales, self).get_delivery_date(cr, uid, sales, context=context)
+        return (vSOplanned_date)
+        
 
     def get_delivered_qty(self, cr, uid, ids, field_name, arg, context=None):
         #move_obj = self.pool.get('stock.move')
