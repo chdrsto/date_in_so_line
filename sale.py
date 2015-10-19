@@ -66,9 +66,7 @@ class sale_order(osv.osv):
         if not ids :
             return False
         
-        vSOplanned_date = self.browse(cr, uid, ids[0]).soplanned_date
-        
-        if not vSOplanned_date :
+        if not self.browse(cr, uid, ids[0]).soplanned_date :
             raise osv.except_osv(_('Error !'),
                                  _("Please fill a valid Customer requested delivery date "
                                    "before using this function"))
@@ -76,7 +74,7 @@ class sale_order(osv.osv):
         for salesorder in self.browse(cr, uid, ids, context):
             # This function iterates through the Sales Order Line items and adjusts them according to the SO Header date
             for line in salesorder.order_line :
-                line.write({'planned_date': vSOplanned_date}, context=context)
+                line.write({'planned_date': self.browse(cr, uid, ids[0]).soplanned_date}, context=context)
         return True
 
     # This function iterates through the Sales Order Line items and groups them in one or multiple delivery orders
